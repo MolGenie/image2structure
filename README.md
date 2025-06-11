@@ -73,4 +73,3 @@ osrTimeout is a time out for OSR processing in seconds, please note that process
 
 chemFormat may be smi, sdf, rxn, rsmi. Currently only in case of smi the chemistry corrections are used.
 
-# image2structure
