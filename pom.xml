@@ -16,20 +16,21 @@
         <jetty.version>9.4.51.v20230217</jetty.version>
     </properties>
     
-    <repositories>
+    <!--repositories>
     	<repository>
 			<id>in-image2structure</id>
     		<name>In Project Repo</name>
     		<url>file://${project.basedir}/libs</url>
 		</repository>
-	</repositories>
+	</repositories-->
 
     <dependencies>
-		<dependency>
+    
+		<!--dependency>
 			<groupId>idcodeexplorer</groupId>
 			<artifactId>idcodeexplorer-java</artifactId>
 			<version>2025.1.1</version>
-		</dependency>
+		</dependency-->
         <dependency>
             <groupId>io.javalin</groupId>
             <artifactId>javalin</artifactId>

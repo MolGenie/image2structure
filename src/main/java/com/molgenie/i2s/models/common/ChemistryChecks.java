@@ -16,7 +16,7 @@ import com.actelion.research.chem.MoleculeStandardizer;
 import com.actelion.research.chem.SSSearcher;
 import com.actelion.research.chem.SmilesParser;
 import com.actelion.research.chem.StereoMolecule;
-import com.actelion.research.chem.descriptor.flexophore.calculator.StructureCalculator;
+import com.molgenie.openchemlib.StructureCalculator;
 
 public record ChemistryChecks( String _smiles ) {
 	private static final Logger log = LoggerFactory.getLogger(ChemistryChecks.class);
@@ -101,7 +101,7 @@ public record ChemistryChecks( String _smiles ) {
 		StereoMolecule mol = new StereoMolecule();
 		try {
 			int mode = SmilesParser.SMARTS_MODE_IS_SMILES | SmilesParser.MODE_SKIP_COORDINATE_TEMPLATES;
-			SmilesParser smilesP = new SmilesParser( mode );
+			SmilesParser smilesP = new SmilesParser( mode, false );
 			smilesP.parse( mol, _smiles.getBytes());
 		} catch (Exception e3) {
 			log.error( "Failed to parse smiles "+_smiles );
