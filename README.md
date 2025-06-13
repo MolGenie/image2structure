@@ -1,6 +1,6 @@
 # image2structure
 
-This software provides a RESTful service for extracting chemical structures from images. More specifically, it encompasses a pipeline for extracting chemical structures from images (via OSR, i.e. optical structure recognition) classifying and eventually correcting the results from them. The open access OpenChemLib library was used to eliminate erroneous chemical structures with wrong isotopes, hypervalent atoms or other problems. The output is given as a JSON formatted response using the raw data as well as chemical compounds and Markush type scaffolds using SMILES format chemical data. Compounds and scaffolds with a molweight greater than 2000 are neglected.
+This software provides a RESTful service for extracting chemical structures from images. More specifically, it encompasses a pipeline for extracting chemical structures from images (via OSR, i.e. optical structure recognition) classifying and eventually correcting the results from them. The open access OpenChemLib library was used to eliminate erroneous chemical structures with wrong isotopes, hypervalent atoms or other problems. The output is given as a JSON formatted response using the raw data as well as chemical compounds and Markush type scaffolds using SMILES format chemical data. Compounds and scaffolds with a molweight greater than 2000 are neglected. As identifiers both the OpenChemLib IDCode and the InChI is calculated for compounds. The IDCode is also calculated for Markush type scaffolds (smiles contain an *) to allow for substructure searching scaffolds.
 
 image2structure is designed as a client-server solution. It can run either locally on a single machine or on a server that is accessible within a network. The OSR component is based on OSRA, a program for extracting chemical structures and reactions developed by Igor Filippov.
 
@@ -32,7 +32,7 @@ If processing was successful the response given by the service is a JSON-formatt
 
 As an example, test3.png which can be found in the test/resources folder shall return:
 
-`{ "osrResult": { "compounds": [ { "smiles": "c1cc(Br)ccc1", "confidence": 1.0806, "resolution": 300, "page": 1, "position": "80x324-308x499", "idcode": "gOpHAbILkW@@@@" } ], "markush": [ { "smiles": "C1CCCC*1", "confidence": 0.552267, "resolution": 300, "page": 1, "position": "684x320-827x494", "idcode": "gFpHJ@IRimUP@" } ], "rawData": "c1cc(Br)ccc1 79.7517 300 1.0806 1 80x324-308x499\nC1CCCC*1 79.3608 300 0.552267 1 684x320-827x494\nC1CC2C3CCC4C1C3C24 81.0853 300 0.40195 1 63x40-387x123" }, "fileName": "/Users/lweber/Desktop/ocrtest/test3.png" }`
+`{ "osrResult": { "compounds": [ { "smiles": "c1cc(Br)ccc1", "confidence": 1.0806, "resolution": 300, "page": 1, "position": "80x324-308x499", "inchi": "InChI=1S/C6H5Br/c7-6-4-2-1-3-5-6/h1-5H", "idcode": "gOpHAbILkW@@@@" } ], "markush": [ { "smiles": "C1CCCC*1", "confidence": 0.552267, "resolution": 300, "page": 1, "position": "684x320-827x494", "idcode": "gFpHJ@IRimUP@" } ], "rawData": "c1cc(Br)ccc1 79.7517 300 1.0806 1 80x324-308x499\nC1CCCC*1 79.3608 300 0.552267 1 684x320-827x494\nC1CC2C3CCC4C1C3C24 81.0853 300 0.40195 1 63x40-387x123" }, "fileName": "/Users/lweber/Desktop/ocrtest/test3.png" }`
 
 The idcode is a unique identifier for small molecules, different to the InChI, it allows to reproduce the original structure.
 
