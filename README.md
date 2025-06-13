@@ -5,7 +5,8 @@ This software provides a RESTful service for extracting chemical structures from
 image2structure is designed as a client-server solution. It can run either locally on a single machine or on a server that is accessible within a network. The OSR component is based on OSRA, a program for extracting chemical structures and reactions developed by Igor Filippov.
 
 # How to build
-`mvn package assembly:single` creates `target/i2s-distribution.tar.gz` archive which contains the application, resources, configurations and shell-scripts to run the application.
+First, install OSRA for all users - https://github.com/metamolecular/osra/blob/master/README. 
+Than, `mvn package assembly:single` creates `target/i2s-distribution.tar.gz` archive which contains the application, resources, configurations and shell-scripts to run the application.
 
 # How to use
 Extract `i2s-distribution.tar.gz`. 
