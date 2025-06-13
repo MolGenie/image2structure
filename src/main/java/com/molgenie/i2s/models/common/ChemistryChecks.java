@@ -38,7 +38,7 @@ public record ChemistryChecks( String _smiles ) {
 	static StructureCalculator sCalc = new StructureCalculator();
 	static String[] fragments = new String[]{ "C12CCC1CC2","O1OOO1" };
 
-	public static String checkMolecule(String _smiles) {
+	public static StereoMolecule checkMolecule(String _smiles) {
 		String ssmiles = null;
 		String flag = null;
 		String idCode = null;
@@ -94,7 +94,7 @@ public record ChemistryChecks( String _smiles ) {
 			log.error("Failed to standardize smiles ", e1);
 			return null;
 		}	
-		return idCode;
+		return mol;
 	}
 	
 	private static StereoMolecule smilesParseMolecule( String _smiles ) {

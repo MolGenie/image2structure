@@ -1,9 +1,11 @@
 package com.molgenie.i2s.services;
 
+import com.actelion.research.chem.StereoMolecule;
 import com.molgenie.i2s.config.IOsraSettings;
 import com.molgenie.i2s.models.OsrImageRequest;
 import com.molgenie.i2s.models.OsrImageResponse;
 import com.molgenie.i2s.models.common.OsrResult;
+import com.molgenie.openchemlib.InchiBuilder;
 import com.molgenie.i2s.models.common.ChemistryChecks;
 import com.molgenie.i2s.models.common.Compound;
 import com.molgenie.i2s.models.common.Markush;
@@ -66,8 +68,9 @@ public class OsraCommandService implements IOsrService {
 					Markush compoundClass = new Markush();
 					String[] splitOSR = molecules[i].split(" ");
 					String smiles = splitOSR[0];
-					String idcode = ChemistryChecks.checkMolecule(smiles);
-					if ( idcode == null ) continue;
+					StereoMolecule mol = ChemistryChecks.checkMolecule(smiles);
+					if ( mol == null ) continue;
+					String idcode = mol.getIDCode();
 					float confidence = Float.valueOf( splitOSR[3] );
 					try {
 						if ( smiles.contains("*") ) {
@@ -79,8 +82,11 @@ public class OsraCommandService implements IOsrService {
 							compoundClass.setPosition( splitOSR[5] );
 							compoundClass.setIDCode( idcode );
 						} else {
-							compound.setSmiles( smiles );
+							InchiBuilder iB = new InchiBuilder();
+							String inchi = iB.createStandardInchi(mol);
 							//System.out.println(smiles);
+							compound.setSmiles( smiles );
+							compound.setInchi(inchi);
 							compound.setResolution( Integer.valueOf( splitOSR[2] ));
 							compound.setConfidence( confidence );
 							compound.setPage( Integer.valueOf( splitOSR[4] ));
