@@ -28,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 @Singleton
 public class OsraCommandService implements IOsrService {
+	
 	private static final Logger log = LoggerFactory.getLogger(OsraCommandService.class);
 	private final IOsraSettings settings;
 
@@ -62,7 +63,7 @@ public class OsraCommandService implements IOsrService {
 		if (settings.chemFormat().equals("smi")) {
 			String[] molecules = stdOutput.split("\n");
 			if ( molecules.length >0 ) {
-				//System.out.println("found compounds:"+molecules.length);
+				System.out.println("found compounds: "+molecules.length);
 				for ( int i=0; i<molecules.length; i++) {
 					Compound compound = new Compound();
 					Markush compoundClass = new Markush();
@@ -152,6 +153,7 @@ public class OsraCommandService implements IOsrService {
 			int exitCode = process.waitFor();
 
 			if ((exitCode == 0)||(exitCode == 15)) {
+				//System.out.println(stdout.toString());
 				return stdout.toString().trim();
 			} else {
 				String errorMessage = stderr.toString().trim();
